@@ -1,0 +1,4 @@
+docker build buildenv -t myos
+docker run --rm -it -v "%cd%":/root/env myos
+make build-x86_64
+Run.bat
