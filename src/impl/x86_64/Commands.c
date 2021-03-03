@@ -45,6 +45,12 @@ uint8_t compare(char* a, char* b){
     return equal;
 }
 char cmd[100];
+void resetnome(){
+    size_t i;
+    for(i = 0; i < 100; i++){
+        name[i] = '\0';
+    }
+}
 void resetcmd(){
     size_t i;
     for(i = 0; i < 100; i++){
@@ -69,6 +75,23 @@ void Run(char* command, size_t sizecmd){
             cmd[i] = command[i];
         }
     } 
+    if(name[0] == '\0'){
+        for(i = 0; i < sizecmd; i++){
+            name[i] = cmd[i];
+        }
+        print_str("\nNome impostato a '");
+        print_str(name);
+        print_str("'\n");
+        resetcmd();
+        del_cursor();
+        clear_row(getrow());
+        print_set_color(PRINT_COLOR_GREEN, PRINT_COLOR_BLACK);
+        print_str(name);
+        print_str("@AceOS>");
+        print_set_color(PRINT_COLOR_LIGHT_GRAY, PRINT_COLOR_BLACK);
+        print_char(' ');
+        return;
+    }
     //for(i = 0; i < sizeof(usablechars); i++) if(usablechars[i] != cmd[i]) cmd[i] = ' '; 
     print_newline();
     if(compare(cmd, "print") == 1){
@@ -80,14 +103,18 @@ void Run(char* command, size_t sizecmd){
     } else if(compare(cmd, "help") == 1 || compare(cmd, "?") == 1 || compare(cmd, "h") == 1 || compare(cmd, "\\?") == 1){
         print_str("Lista dei comandi:\n    help  - mostra la lista dei comandi - alias h, ?, \\?\n    print <arg> - funzione di print"); 
     } else {
-        print_str("Non ho trovato nessun comando nominato '");
-        print_str(cmd);
-        print_str("'\nUsa 'help' per una lista dei comandi.");
+        print_error("Non ho trovato nessun comando nominato '");
+        print_error(cmd);
+        print_error("'\nUsa 'help' per una lista dei comandi.");
     }
     resetcmd();
     del_cursor();
     print_char('\n');
     clear_row(getrow());
-    print_str("AceOS> ");
+    print_set_color(PRINT_COLOR_GREEN, PRINT_COLOR_BLACK);
+    print_str(name);
+    print_str("@AceOS>");
+    print_set_color(PRINT_COLOR_LIGHT_GRAY, PRINT_COLOR_BLACK);
+    print_char(' ');
     return;
 }

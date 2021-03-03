@@ -14,10 +14,14 @@ void kernel_main(){
     print_clear();
     print_set_color(PRINT_COLOR_GREEN, PRINT_COLOR_BLACK);
     restart_keyboard();
-    print_str("AceOS STARTED");
-    print_char('\n');
+    print_str("AceOS STARTED\n");
+    print_set_color(PRINT_COLOR_LIGHT_GRAY, PRINT_COLOR_BLACK);
+    print_str("Inserire un nome da utilizzare in questa sessione.\nIl nome non potra' essere cambiato.\n");
     print_cursor();
-    print_str("AceOS> ");
+    print_set_color(PRINT_COLOR_GREEN, PRINT_COLOR_BLACK);
+    print_str("AceOS>");
+    print_set_color(PRINT_COLOR_LIGHT_GRAY, PRINT_COLOR_BLACK);
+    print_char(' ');
     while(1){
         Type();
     }

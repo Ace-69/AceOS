@@ -130,3 +130,10 @@ void print_str(char* str) {
 void print_set_color(uint8_t foreground, uint8_t background) {
     color = foreground + (background << 4);
 }
+
+void print_error(char* str){
+    uint8_t oldcolor = color;
+    color = PRINT_COLOR_LIGHT_RED + (PRINT_COLOR_BLACK << 4);
+    print_str(str);
+    color = oldcolor;
+}

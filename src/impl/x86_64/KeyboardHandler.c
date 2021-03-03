@@ -47,7 +47,11 @@ void Type(){
             reset();
             del_cursor();
             print_newline();
-            print_str("AceOS> ");
+            print_set_color(PRINT_COLOR_GREEN, PRINT_COLOR_BLACK);
+            print_str(name);
+            print_str("@AceOS>");
+            print_set_color(PRINT_COLOR_LIGHT_GRAY, PRINT_COLOR_BLACK);
+            print_char(' ');
         }
         if(getch() == 'L'){
             shift = 1;
