@@ -53,7 +53,7 @@ void Type(){
             print_set_color(PRINT_COLOR_LIGHT_GRAY, PRINT_COLOR_BLACK);
             print_char(' ');
         }
-        if(getch() == 'L'){
+        if(getch() == 'L'|| getch() == 'R'){
             shift = 1;
         }
         if(inb(PORT) == 0xAA || inb(PORT) == 0xb6){
