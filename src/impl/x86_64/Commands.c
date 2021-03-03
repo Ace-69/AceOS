@@ -44,16 +44,23 @@ uint8_t compare(char* a, char* b){
     }
     return equal;
 }
-
+char cmd[100];
+void resetcmd(){
+    size_t i;
+    for(i = 0; i < 100; i++){
+        cmd[i] = '\0';
+        //asm ("mov %0, 0" : "=a"(cmd[i]));
+    }
+}
 void Run(char* command, size_t sizecmd){
-    
-    char cmd[sizecmd];
+    //char cmd[sizecmd];
     size_t i;
     for(i = 0; i < sizecmd; i++){
         cmd[i] = '\0';
+        //asm ("mov %0, 0" : "=a"(cmd[i]));
     }
     if(search(command, (char)32) == 0) {
-        for(i = 0; command[i] != '\0'; i++){
+        for(i = 0; i< sizecmd; i++){
             cmd[i] = '\0';
             cmd[i] = command[i];
         }
@@ -76,6 +83,7 @@ void Run(char* command, size_t sizecmd){
         print_str("Non ho trovato nessun comando nominato ");
         print_str(cmd);
     }
+    resetcmd();
     del_cursor();
     print_char('\n');
     clear_row(getrow());

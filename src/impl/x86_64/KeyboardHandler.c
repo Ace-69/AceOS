@@ -13,8 +13,7 @@ static inline uint8_t inb(uint16_t port) {
     return ret;
 }
 
-static inline void outb(uint16_t port, uint8_t val)
-{
+static inline void outb(uint16_t port, uint8_t val) {
     asm volatile ( "outb %0, %1" : : "a"(val), "Nd"(port) );
 }
 unsigned int restart_keyboard(){
@@ -37,7 +36,7 @@ size_t contachar = 0, shift = 0, caps = 0;
 void reset(){
     for(size_t i = 0; i < contachar; i++){
         //asm ("mov %0, 0" : "=a" (comando[i]));
-        comando[i] = (char)0;
+        comando[i] = '\0';
     }
     contachar = 0;
 }
