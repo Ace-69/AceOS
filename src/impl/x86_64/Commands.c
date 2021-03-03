@@ -80,8 +80,9 @@ void Run(char* command, size_t sizecmd){
     } else if(compare(cmd, "help") == 1 || compare(cmd, "?") == 1 || compare(cmd, "h") == 1 || compare(cmd, "\\?") == 1){
         print_str("Lista dei comandi:\n    help  - mostra la lista dei comandi - alias h, ?, \\?\n    print <arg> - funzione di print"); 
     } else {
-        print_str("Non ho trovato nessun comando nominato ");
+        print_str("Non ho trovato nessun comando nominato '");
         print_str(cmd);
+        print_str("'\nUsa 'help' per una lista dei comandi.");
     }
     resetcmd();
     del_cursor();
