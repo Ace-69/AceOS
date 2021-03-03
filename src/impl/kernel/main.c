@@ -1,6 +1,7 @@
 #include "print.h"
 #include "KeyboardController.h"
 #include "Commands.h"
+#include "MouseController.h"
 
 static inline uint8_t inb(uint16_t port) {
     uint8_t ret;
@@ -14,6 +15,7 @@ void kernel_main(){
     print_clear();
     print_set_color(PRINT_COLOR_GREEN, PRINT_COLOR_BLACK);
     restart_keyboard();
+    restart_mouse();
     print_str("AceOS STARTED\n");
     print_set_color(PRINT_COLOR_LIGHT_GRAY, PRINT_COLOR_BLACK);
     print_str("Inserire un nome da utilizzare in questa sessione.\nIl nome non potra' essere cambiato.\n");
@@ -24,5 +26,6 @@ void kernel_main(){
     print_char(' ');
     while(1){
         Type();
+        //Mouse();  // mouse base added (not working (yet))
     }
 }
