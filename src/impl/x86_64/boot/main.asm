@@ -115,15 +115,15 @@ error:
 	hlt
 
 section .bss
-align 8192
+align 4096 
 page_table_l4:
-	resb 8192
+	resb 4096 
 page_table_l3:
-	resb 8192
+	resb 4096 
 page_table_l2:
-	resb 8192
+	resb 4096 
 stack_bottom:
-	resb 8192 * 4
+	resb 4096  * 4
 stack_top:
 
 section .rodata
