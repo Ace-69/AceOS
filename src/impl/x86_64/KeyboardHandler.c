@@ -33,7 +33,7 @@ unsigned char getch() {
     return returnvalue;
 }
 char comando[72];
-size_t contachar = 0;
+size_t contachar = 0, shift = 0, caps = 0;
 void reset(){
     for(size_t i = 0; i < contachar; i++){
         //asm ("mov %0, 0" : "=a" (comando[i]));
@@ -49,6 +49,19 @@ void Type(){
             del_cursor();
             print_newline();
             print_str("AceOS> ");
+        }
+        if(getch() == 'L'){
+            shift = 1;
+        }
+        if(inb(PORT) == 0xAA || inb(PORT) == 0xb6){
+            shift = 0;
+        }
+        if(getch() == 'C'){
+            if(caps == 0){
+                caps = 1;
+            } else {
+                caps = 0;
+            }
         }
         if(getch() == '\n'){
             if(comando[0] == '\0') return;
@@ -71,10 +84,25 @@ void Type(){
             return;
         }
         if(getch() != '\0' && contachar != 71 && getch() != 'L' && getch() != 'R' && getch() != 'E' && getch() != 'C'){
-            print_char(getch());
-            comando[contachar] = getch();
+            if(shift == 1 && caps == 0){
+                print_char(toUpperCase(getch()));
+                comando[contachar] = toUpperCase(getch());
+            } else if(shift == 0 && caps == 1){
+                print_char(toUpperCase(getch()));
+                comando[contachar] = toUpperCase(getch());
+            } else if(shift == 0 && caps == 0){
+                print_char(getch());
+                comando[contachar] = getch();
+            } else if(shift == 1 && caps == 1){
+                print_char(getch());
+                comando[contachar] = getch();
+            } else {
+                print_char(getch());
+                comando[contachar] = getch();
+            }
             comando[contachar+1] = '\0';
             contachar++;
+            return;
         }
     }
 }
